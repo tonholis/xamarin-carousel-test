@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local="clr-namespace:XamCarouselTest" 
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Class="XamCarouselTest.Views.MainPage" 
+             BackgroundColor="Silver" Padding="10"
+             Title="MainPage">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:InvertBoolConverter x:Key="InvertBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <cv:CarouselViewControl Orientation="Horizontal"
+                                      InterPageSpacing="30" 
+                                      ShowIndicators="True" 
+                                      ItemsSource="{Binding Items}" >
+        <cv:CarouselViewControl.ItemTemplate>
+            <DataTemplate>
+                <StackLayout>
+                    <Label Text="{Binding Title}" />
+                    <Button IsEnabled="{Binding Active, Converter={StaticResource InvertBoolConverter}}" Text="Click me"/>
+                </StackLayout>
+            </DataTemplate>
+        </cv:CarouselViewControl.ItemTemplate>
+    </cv:CarouselViewControl>
+
+</ContentPage>
